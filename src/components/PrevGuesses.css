@@ -1,0 +1,37 @@
+.GuessContainer-correct{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    border: 1px solid black;
+    width: 15rem;
+    border-color: rgb(156, 235, 156) ;
+    background-color:rgb(156, 235, 156) ;
+    border-radius: 0.25rem;
+    box-shadow: 0 0 10px rgb(156, 235, 156);
+
+
+}
+.GuessContainer-incorrect{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    border: 2px solid black;
+    width: 15rem;
+    border-color: black ;
+    border-radius: 0.25rem;
+    min-height: 2.5rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+}
+
+.userGuess{
+    position: relative;
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    margin: 0.5rem;
+}
+
+

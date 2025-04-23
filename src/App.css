@@ -1,38 +1,79 @@
+
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.UserGuessContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
+  align-content: center;
+}
+
+.container{
+  position: relative;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  text-align: center;
+  min-height: 20rem;
+  margin: 0;
 }
 
-.App-link {
-  color: #61dafb;
+.RestartButton{
+  margin: 1rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+input{
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid #ccc;
 }
+input:focus{
+  outline: none;
+}
+
+.PokemonImageContainer {
+  position: relative;
+  border-radius:1rem;
+  margin: 0.5rem;
+  overflow: hidden;
+  scale: 1.5;
+}
+
+.imageContainer{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #7bb9f3;
+  border: 2px solid black ;
+  border-radius: 1rem;
+  height: 10rem;
+  width: 10rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.PokemonImage0{
+  scale: 8;
+}
+.PokemonImage1{
+  scale: 6;
+}
+.PokemonImage2{
+  scale: 4;
+}
+.PokemonImage3{
+  scale: 2;
+}
+.PokemonImage4{
+  scale: 1;
+}
+.PokemonImageWin{
+  scale: 1;
+}
+

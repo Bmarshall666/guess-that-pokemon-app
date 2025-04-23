@@ -1,15 +1,29 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import axios from "axios";
-import PrevGuesses from "./PrevGuesses.jsx";
+import PrevGuesses from "./components/PrevGuesses.jsx";
 
 function App() {
   const [pokemon, setPokemon] = useState([]);
-  const GuessRef = useRef("");
+  const [guess, setGuess] = useState("");
+  const [guesses, setGuesses] = useState([]);
+  const [guessCount, setGuessCount] = useState(0);
 
-  useEffect(()=>{
+  let RestartButton = null;
+
+  let pokemonName = null;
+
+  let form = (
+    <form onSubmit={handleGuess}>
+      <input onChange={handleChange} name="guess" type="text" value={guess} />
+      <button className="submitButton" type="submit">
+        Submit
+      </button>
+    </form>
+  );
+
+  useEffect(() => {
     let pokeID = Math.floor(Math.random() * 152);
-
     axios
       .get(`https://pokeapi.co/api/v2/pokemon/${pokeID}`)
       .then((response) => {
@@ -24,39 +38,95 @@ function App() {
       .catch(function (error) {
         console.log(error);
       });
-  },[])
+  }, []);
 
-  function Guess(event) {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const guess = formData.get("guess");
-
-    if (guess.toLowerCase() === pokemon.name.toLowerCase()) {
-      alert("correct");
-      console.log("correct");
-    }else{
-      alert("wrong");
-
-      console.log("wrong");
-
+  useEffect(() => {
+    if (guesses.some((guess) => guess.correct)) {
+      setGuessCount("Win");
     }
+  }, [guesses, guessCount]);
+
+  function handleChange(event) {
+    setGuess(event.target.value);
   }
 
+  function handleGuess(event) {
+    event.preventDefault();
+    setGuessCount(guessCount + 1);
+    const guessName = guess;
+    setGuess("");
+    const newGuess = {
+      name: guessName,
+      correct: guessName.toLowerCase() === pokemon.name.toLowerCase(),
+    };
+
+    setGuesses((prevGuesses) => [...prevGuesses, newGuess]);
+  }
+
+  if (guessCount >= 5) {
+    RestartButton = (
+      <button
+        className="RestartButton"
+        onClick={() => window.location.reload()}
+      >
+        You Loose! Try Again?
+      </button>
+    );
+    pokemonName = (
+      <h2 className="PokemonName">
+        The Pokemon was {pokemon.name}! Better Luck Next Time!
+      </h2>
+    );
+    form = <></>;
+  }
+
+  if (guesses.some((guess) => guess.correct)) {
+    RestartButton = (
+      <button
+        className="RestartButton"
+        onClick={() => window.location.reload()}
+      >
+        You Win! Try Again?
+      </button>
+    );
+    pokemonName = (
+      <h2 className="PokemonName">
+        The Pokemon was {pokemon.name}! Well Done!
+      </h2>
+    );
+    form = <></>;
+  }
 
   return (
     <div className="App">
       <div className="container">
         <div className="PokemonNameContainer">
-          <h1 className="PokemonName">{pokemon.name}</h1>
+          <h1 className="PokemonName">Guess That Pokemon!</h1>
+          {pokemonName}
         </div>
-        <div className="PokemonImageContainer">
-          <img className="PokemonImage" src={pokemon.image} alt={pokemon.image} />
+        <div className="imageContainer">
+          <div className="PokemonImageContainer">
+            <img
+              className={`PokemonImage` + guessCount}
+              src={pokemon.image}
+              alt={pokemon.image}
+            />
+          </div>
         </div>
-        <form onSubmit={Guess}>
-          <input name="guess" type="text"/>
-          <button type="submit">Submit</button>
-        </form>
       </div>
+      {form}
+      <div className="UserGuessContainer">
+        {guesses.map((guess, index) => {
+          return (
+            <PrevGuesses
+              key={index}
+              guess={guess.name}
+              correct={guess.correct}
+            />
+          );
+        })}
+      </div>
+      <div>{RestartButton}</div>
     </div>
   );
 }
