@@ -5,6 +5,10 @@
 
 }
 
+.SubmitButton{
+  vertical-align: middle;
+}
+
 .UserGuessContainer {
   display: flex;
   flex-direction: column;
