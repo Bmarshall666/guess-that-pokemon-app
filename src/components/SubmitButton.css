@@ -1,13 +1,14 @@
-@supports (-webkit-touch-callout: none) {
-    .btn-class-name  {
-      top: 0rem; 
+@media not all and (min-resolution: 0.001dpcm) and (min-width: 0px) {
+    @supports (-webkit-touch-callout: none) {
+        .btn-class-name {
+            top: 0rem;
+        }
     }
-  }
-  
+}
 
 .btn-class-name {
     --primary: 103, 100, 117;
-    --secondary:53, 63, 74 ;
+    --secondary: 53, 63, 74;
     width: 60px;
     height: 50px;
     border: none;
@@ -20,11 +21,11 @@
     position: relative;
     transition: .3s;
     scale: 0.8;
-    top:1.2rem;
+    top: 1.2rem;
     left: 0.5rem;
-  }
+}
 
-  .btn-class-name .back {
+.btn-class-name .back {
     background: rgb(var(--secondary));
     border-radius: 100%;
     position: absolute;
@@ -32,9 +33,9 @@
     top: 0;
     width: 100%;
     height: 100%;
-  }
+}
 
-  .btn-class-name .front {
+.btn-class-name .front {
     background: linear-gradient(0deg, rgba(var(--primary), .6) 20%, rgba(var(--primary)) 50%);
     box-shadow: 0 .5em 1em -0.2em rgba(var(--secondary), .5);
     border-radius: 100%;
@@ -53,18 +54,18 @@
     transform: translateY(-15%);
     transition: .15s;
     color: rgb(var(--secondary));
-  }
+}
 
-  .btn-class-name:active .front {
+.btn-class-name:active .front {
     transform: translateY(0%);
     box-shadow: 0 0;
-  }
+}
 
-  .GameOverMsgContainer{
+.GameOverMsgContainer {
     position: absolute;
     min-height: 1rem;
-  }
+}
 
-  .btn-text{
-color: aqua;    
+.btn-text {
+    color: aqua;
 }
