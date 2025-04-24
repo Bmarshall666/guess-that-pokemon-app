@@ -1,18 +1,7 @@
-/* Target iOS devices */
-@supports (-webkit-overflow-scrolling: touch) {
-  .SubmitButton {
-    position: relative;
-    top: -5px; 
-  }
-}
 
 .App {
   text-align: center;
 
-}
-
-.SubmitButton{
-  vertical-align: middle;
 }
 
 .UserGuessContainer {
