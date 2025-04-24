@@ -10,7 +10,6 @@
     border-radius: 0.25rem;
     box-shadow: 0 0 10px rgb(156, 235, 156);
 
-
 }
 .GuessContainer-incorrect{
     position: relative;
@@ -23,7 +22,7 @@
     border-radius: 0.25rem;
     min-height: 2.5rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-
+    background-color: #c5def5;
 }
 
 .userGuess{

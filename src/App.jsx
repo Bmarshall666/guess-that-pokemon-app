@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import axios from "axios";
 import PrevGuesses from "./components/PrevGuesses.jsx";
+import SubmitButton from "./components/SubmitButton.jsx"
+import TryAgainButton from "./components/TryAgainButton.jsx"
 
 function App() {
   const [pokemon, setPokemon] = useState([]);
@@ -14,11 +16,9 @@ function App() {
   let pokemonName = null;
 
   let form = (
-    <form onSubmit={handleGuess}>
+    <form autocomplete="off" onSubmit={handleGuess}>
       <input onChange={handleChange} name="guess" type="text" value={guess} />
-      <button className="submitButton" type="submit">
-        Submit
-      </button>
+      <SubmitButton/>
     </form>
   );
 
@@ -65,12 +65,7 @@ function App() {
 
   if (guessCount >= 5) {
     RestartButton = (
-      <button
-        className="RestartButton"
-        onClick={() => window.location.reload()}
-      >
-        You Loose! Try Again?
-      </button>
+      <TryAgainButton win={false}/>
     );
     pokemonName = (
       <h2 className="PokemonName">
@@ -82,12 +77,8 @@ function App() {
 
   if (guesses.some((guess) => guess.correct)) {
     RestartButton = (
-      <button
-        className="RestartButton"
-        onClick={() => window.location.reload()}
-      >
-        You Win! Try Again?
-      </button>
+      <TryAgainButton win={true}/>
+
     );
     pokemonName = (
       <h2 className="PokemonName">
