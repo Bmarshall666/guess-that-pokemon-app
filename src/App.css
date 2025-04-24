@@ -4,6 +4,7 @@
 
 }
 
+
 .UserGuessContainer {
   display: flex;
   flex-direction: column;
@@ -33,6 +34,7 @@ input{
   border-radius: 0.25rem;
   border: 1px solid #ccc;
   overflow: hidden;
+  max-width: 8rem;
 }
 input:focus{
   outline: none;
