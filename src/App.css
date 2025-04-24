@@ -1,9 +1,15 @@
 
 .App {
   text-align: center;
-
 }
 
+.PokemonName{
+  margin: 0.5rem;
+}
+
+.PokemonNameContainer{
+
+}
 
 .UserGuessContainer {
   display: flex;
@@ -19,8 +25,8 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  min-height: 20rem;
-  margin: 0;
+  min-height: 2rem;
+  
 }
 
 .RestartButton{
@@ -59,6 +65,7 @@ input:focus{
   border-radius: 1rem;
   height: 10rem;
   width: 10rem;
+  margin: 0.6rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 

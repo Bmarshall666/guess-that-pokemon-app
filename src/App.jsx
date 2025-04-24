@@ -16,7 +16,7 @@ function App() {
   let pokemonName = null;
 
   let form = (
-    <form autocomplete="off" onSubmit={handleGuess}>
+    <form autoComplete="off" onSubmit={handleGuess}>
       <input onChange={handleChange} name="guess" type="text" value={guess} />
       <SubmitButton/>
     </form>
