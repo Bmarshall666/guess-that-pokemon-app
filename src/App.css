@@ -12,10 +12,6 @@
   margin: 0.5rem;
 }
 
-.PokemonNameContainer{
-
-}
-
 .UserGuessContainer {
   display: flex;
   flex-direction: column;
@@ -31,7 +27,7 @@
   align-items: center;
   text-align: center;
   min-height: 2rem;
-  
+  display:block
 }
 
 .RestartButton{
@@ -93,3 +89,9 @@ input:focus{
   scale: 1;
 }
 
+@media (max-width: 768px) {
+  .Title{
+    width: 25rem
+  }
+  
+}
