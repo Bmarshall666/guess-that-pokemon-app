@@ -23,7 +23,7 @@ function App() {
   );
 
   useEffect(() => {
-    let pokeID = Math.floor(Math.random() * 152);
+    let pokeID = Math.floor(Math.random() * 1025);
     axios
       .get(`https://pokeapi.co/api/v2/pokemon/${pokeID}`)
       .then((response) => {
