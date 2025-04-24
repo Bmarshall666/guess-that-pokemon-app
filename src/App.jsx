@@ -92,7 +92,7 @@ function App() {
     <div className="App">
       <div className="container">
         <div className="PokemonNameContainer">
-          <h1 className="PokemonName">Guess That Pokemon!</h1>
+          <img className="Title" src="GuessThatPokemon.png"/>
           {pokemonName}
         </div>
         <div className="imageContainer">
