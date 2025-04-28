@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import axios from "axios";
 import PrevGuesses from "./components/PrevGuesses.jsx";
-import SubmitButton from "./components/SubmitButton.jsx"
-import TryAgainButton from "./components/TryAgainButton.jsx"
+import SubmitButton from "./components/SubmitButton.jsx";
+import TryAgainButton from "./components/TryAgainButton.jsx";
 
 function App() {
   const [pokemon, setPokemon] = useState([]);
@@ -18,26 +18,35 @@ function App() {
   let form = (
     <form autoComplete="off" onSubmit={handleGuess}>
       <input onChange={handleChange} name="guess" type="text" value={guess} />
-      <SubmitButton/>
+      <SubmitButton />
     </form>
   );
 
   useEffect(() => {
-    let pokeID = Math.floor(Math.random() * 1025);
-    axios
-      .get(`https://pokeapi.co/api/v2/pokemon/${pokeID}`)
-      .then((response) => {
+    const fetchAllPokemon = async () => {
+      try {
+        // Fetch all Pokémon names and URLs
+        const response = await axios.get(
+          "https://pokeapi.co/api/v2/pokemon?limit=1025"
+        );
+        const allPokemonList = response.data.results;
+
+        // Fetch details of the randomly selected Pokémon
+        const pokemonResponse = await axios.get(allPokemonList[Math.floor(Math.random() * allPokemonList.length)].url);
         const result = {
-          name: response.data.name,
-          image: response.data.sprites["front_default"],
-          type: response.data.types.map((type) => type.type.name).join(", "),
-          id: response.data.id,
+          name: pokemonResponse.data.name,
+          image: pokemonResponse.data.sprites["front_default"],
+          // type: pokemonResponse.data.types
+          //   .map((type) => type.type.name)
+          //   .join(", "),
+          id: pokemonResponse.data.id,
         };
         setPokemon(result);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+      } catch (error) {
+        console.error("Error fetching Pokémon:", error);
+      }
+    };
+    fetchAllPokemon();
   }, []);
 
   useEffect(() => {
@@ -64,9 +73,7 @@ function App() {
   }
 
   if (guessCount >= 5) {
-    RestartButton = (
-      <TryAgainButton win={false}/>
-    );
+    RestartButton = <TryAgainButton win={false} />;
     pokemonName = (
       <h2 className="PokemonName">
         The Pokemon was {pokemon.name}! Better Luck Next Time!
@@ -76,10 +83,7 @@ function App() {
   }
 
   if (guesses.some((guess) => guess.correct)) {
-    RestartButton = (
-      <TryAgainButton win={true}/>
-
-    );
+    RestartButton = <TryAgainButton win={true} />;
     pokemonName = (
       <h2 className="PokemonName">
         The Pokemon was {pokemon.name}! Well Done!
@@ -92,7 +96,11 @@ function App() {
     <div className="App">
       <div className="container">
         <div className="PokemonNameContainer">
-          <img className="Title" src="GuessThatPokemon.png" alt="GuessThatPokemon.png"/>
+          <img
+            className="Title"
+            src="GuessThatPokemon.png"
+            alt="GuessThatPokemon.png"
+          />
           {pokemonName}
         </div>
         <div className="imageContainer">

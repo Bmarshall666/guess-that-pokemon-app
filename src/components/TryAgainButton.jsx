@@ -17,7 +17,7 @@ const TryAgainButton = (props) => {
                 <span className="back" />
                 <span className="front" />
             </button>
-            <p clasName="texbtnTextt">{gameOverMsg}</p>
+            <p className="texbtnTextt">{gameOverMsg}</p>
         </div>
 
 
