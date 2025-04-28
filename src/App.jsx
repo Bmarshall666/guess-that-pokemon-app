@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import axios from "axios";
 import PrevGuesses from "./components/PrevGuesses.jsx";
@@ -10,17 +10,33 @@ function App() {
   const [guess, setGuess] = useState("");
   const [guesses, setGuesses] = useState([]);
   const [guessCount, setGuessCount] = useState(0);
+  const allPokemonList = useRef([]);
 
   let RestartButton = null;
-
   let pokemonName = null;
 
   let form = (
     <form autoComplete="off" onSubmit={handleGuess}>
       <input onChange={handleChange} name="guess" type="text" value={guess} />
       <SubmitButton />
+      <div>
+        {allPokemonList.current.filter(pokemon => {
+          const searchTearm = guess.toLowerCase();
+          const searchedPokemon = pokemon.name.toLowerCase();
+          return searchTearm && searchedPokemon.startsWith(searchTearm)
+        }).map((pokemon) => (
+          <div key={pokemon.id} onClick={() => setSearch(pokemon.name)} className="PokemonList">
+            <div>{pokemon.name}</div>
+          </div>
+        ))}
+      </div>
     </form>
   );
+
+  const setSearch = (name) => {
+    setGuess(name);
+  }
+
 
   useEffect(() => {
     const fetchAllPokemon = async () => {
@@ -29,10 +45,10 @@ function App() {
         const response = await axios.get(
           "https://pokeapi.co/api/v2/pokemon?limit=1025"
         );
-        const allPokemonList = response.data.results;
+        allPokemonList.current = response.data.results;
 
         // Fetch details of the randomly selected Pokémon
-        const pokemonResponse = await axios.get(allPokemonList[Math.floor(Math.random() * allPokemonList.length)].url);
+        const pokemonResponse = await axios.get(allPokemonList.current[Math.floor(Math.random() * allPokemonList.current.length)].url);
         const result = {
           name: pokemonResponse.data.name,
           image: pokemonResponse.data.sprites["front_default"],
