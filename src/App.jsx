@@ -19,16 +19,18 @@ function App() {
     <form autoComplete="off" onSubmit={handleGuess}>
       <input onChange={handleChange} name="guess" type="text" value={guess} />
       <SubmitButton />
-      <div>
+      <div className="PokemonListContainer">
+        <div className="PokemonList">
         {allPokemonList.current.filter(pokemon => {
           const searchTearm = guess.toLowerCase();
           const searchedPokemon = pokemon.name.toLowerCase();
           return searchTearm && searchedPokemon.startsWith(searchTearm)
         }).map((pokemon) => (
-          <div key={pokemon.id} onClick={() => setSearch(pokemon.name)} className="PokemonList">
-            <div>{pokemon.name}</div>
+          <div key={pokemon.id} onClick={() => setSearch(pokemon.name)} className="PokemonListItems">
+            <div className="SuggestedPokemon">{pokemon.name}</div>
           </div>
         ))}
+        </div>
       </div>
     </form>
   );
